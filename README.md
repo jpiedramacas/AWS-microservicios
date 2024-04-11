@@ -1,5 +1,3 @@
-Claro, aquí están los pasos adicionales que puedes seguir para complementar la lista existente:
-
 ### 1. Instalar Docker
 Ya que este paso ya está cubierto en la lista anterior, puedes omitirlo si ya lo has realizado.
 
