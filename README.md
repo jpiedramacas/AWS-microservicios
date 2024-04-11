@@ -1,90 +1,52 @@
-### Pasos para Despliegue:
+Claro, aquí están los pasos adicionales que puedes seguir para complementar la lista existente:
 
-1. **Conéctate a la Instancia EC2**: Utiliza SSH para conectarte a tu instancia EC2 desde tu terminal local:
+### 1. Instalar Docker
+Ya que este paso ya está cubierto en la lista anterior, puedes omitirlo si ya lo has realizado.
 
-   ```bash
-   ssh -i tu_llave.pem ec2-user@direccion_ip_publica
-   ```
+### 2. Instalar Docker Compose
+Este paso también está cubierto en la lista anterior, así que puedes omitirlo si ya has instalado Docker Compose.
 
-   Reemplaza `tu_llave.pem` con la ruta a tu archivo de clave privada y `direccion_ip_publica` con la dirección IP pública de tu instancia EC2.
+### 3. Crear un Tema SNS y Suscribirse
+Para crear un tema SNS y suscribirte a él, sigue estos pasos:
 
-2. **Actualiza las Bibliotecas del Sistema**:
+#### a. Crear un Tema SNS en la Consola de AWS:
+   - Ve al [AWS Management Console](https://console.aws.amazon.com/) y navega a "Simple Notification Service (SNS)".
+   - Haz clic en "Create topic".
+   - Asigna un nombre descriptivo para el tema y crea el tema.
 
-   ```bash
-   sudo yum update -y
-   ```
+#### b. Suscribirte al Tema SNS:
+   - Después de crear el tema, selecciona el tema recién creado.
+   - Haz clic en "Create subscription".
+   - Elige el tipo de protocolo para la suscripción (por ejemplo, Email).
+   - Proporciona los detalles necesarios (por ejemplo, la dirección de correo electrónico para la suscripción por correo electrónico).
 
-3. **Instala Docker en la Instancia EC2**:
+### 4. Crear un Rol en EC2 y Asignar Políticas SNS Full Access
+Para crear un rol en EC2 y asignarle políticas de acceso completo a SNS:
 
-   ```bash
-   sudo yum install -y docker
-   ```
+#### a. Crear un Rol en IAM:
+   - Ve a la [Consola de IAM](https://console.aws.amazon.com/iam/) en AWS.
+   - Selecciona "Roles" en el panel de navegación izquierdo y luego haz clic en "Create role".
+   - Para el tipo de entidad de confianza, selecciona "AWS service" y luego "EC2".
+   - Adjunta una política que permita acceso total a SNS (por ejemplo, `AmazonSNSFullAccess`).
 
-4. **Inicia el Servicio de Docker**:
+#### b. Asignar el Rol a la Instancia EC2:
+   - Una vez que hayas creado el rol, ve a la página de detalles de tu instancia EC2 en la consola de AWS.
+   - Haz clic en "Actions" y luego en "Security" > "Modify IAM role".
+   - Selecciona el rol que creaste anteriormente y guarda los cambios.
 
-   ```bash
-   sudo service docker start
-   ```
+### 5. Ejecutar el Comando `sudo docker-compose up`
+Este paso también está cubierto en la lista anterior, así que ejecuta este comando después de haber configurado tus contenedores con Docker Compose.
 
-5. **Añade tu Usuario al Grupo Docker**:
+### 6. Acceder al Formulario y Recibir un Email
+Para acceder al formulario y recibir un correo electrónico:
 
-   ```bash
-   sudo usermod -a -G docker $(whoami)
-   ```
+#### a. Acceder al Formulario:
+   - Abre un navegador web e ingresa la dirección IP pública de tu instancia EC2 para acceder a tu aplicación web.
 
-   Esto te permite ejecutar comandos de Docker sin necesidad de usar `sudo`.
+#### b. Recibir un Correo Electrónico desde SNS:
+   - Envía un mensaje al tema SNS desde tu aplicación PHP utilizando el ARN del tema.
+   - Dependiendo de cómo esté configurada tu suscripción (por ejemplo, correo electrónico), deberías recibir un correo electrónico con el mensaje publicado en el tema SNS.
 
-6. **Instala Docker Compose**:
+Recuerda ajustar tu código PHP para integrar la funcionalidad de publicación de mensajes en el tema SNS utilizando el SDK de AWS para PHP u otra librería compatible con SNS.
 
-   ```bash
-   sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-   sudo chmod +x /usr/local/bin/docker-compose
-
-   docker-compose --version
-   ```
-
-7. **Instala PHP y Composer**:
-
-   ```bash
-   sudo yum install php php-cli php-json php-mbstring -y
-
-   sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-   sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-   sudo php -r "unlink('composer-setup.php');"
-   ```
-   
-### AWS SNS (Amazon Simple Notification Service)
-
-Para integrar AWS SNS en tu aplicación PHP, necesitarás los siguientes requisitos:
-
-1. **Cuenta de AWS**: Debes tener una cuenta de AWS y acceso a AWS Management Console.
-
-2. **IAM Role**: Asegúrate de que la instancia EC2 tenga un IAM Role asociado que permita el acceso al servicio SNS. Este rol debería tener al menos permisos para publicar mensajes en el tema SNS.
-
-3. **Tema SNS**: Crea un tema SNS en la consola de AWS y toma nota del ARN del tema. Este ARN se usará en tu aplicación PHP para enviar mensajes al tema.
-
-4. **Región de AWS**: Usa la misma región de AWS en la que has configurado tu tema SNS. Asegúrate de configurar la región adecuada en la inicialización del cliente SNS en tu aplicación PHP.
-8. **Ejecuta Docker Compose**:
-
-   Ubícate en el directorio donde se encuentra tu archivo `docker-compose.yml` y ejecuta:
-
-   ```bash
-   docker-compose up -d
-   ```
-
-   Esto creará y ejecutará los contenedores de Docker según la configuración en `docker-compose.yml`.
-
-10. **Accede a la Aplicación Web y phpMyAdmin**:
-
-    Utiliza el navegador web para acceder a la aplicación web en `http://<direccion_ip_publica>` y a phpMyAdmin en `http://<direccion_ip_publica>:8080`. Reemplaza `<direccion_ip_publica>` con la dirección IP pública de tu instancia EC2.
-
-
-
-### Notas Adicionales:
-
-- Asegúrate de reemplazar `<direccion_ip_publica>` con la dirección IP pública de tu instancia EC2 en los archivos `index.html` y `submit.php` donde sea necesario para que funcionen correctamente.
-
-- Asegúrate de tener suficiente espacio en disco y recursos de memoria en tu instancia EC2 para ejecutar los contenedores Docker según los requisitos de las aplicaciones y servicios.
-
-Siguiendo estos pasos y requisitos, deberías poder desplegar y acceder a tu entorno de desarrollo en AWS EC2 utilizando Docker. Asegúrate de realizar pruebas adicionales y ajustes según sea necesario para adaptarse a tus requisitos específicos y optimizar el rendimiento de tu entorno.
+Con estos pasos adicionales, deberías tener un despliegue completo en AWS EC2 con Docker, incluyendo la integración con AWS SNS para el envío de mensajes y correos electrónicos desde tu aplicación PHP.
