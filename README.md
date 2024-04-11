@@ -76,3 +76,34 @@ Para acceder al formulario y recibir un correo electrónico:
 Recuerda ajustar tu código PHP para integrar la funcionalidad de publicación de mensajes en el tema SNS utilizando el SDK de AWS para PHP u otra librería compatible con SNS.
 
 Con estos pasos adicionales, deberías tener un despliegue completo en AWS EC2 con Docker, incluyendo la integración con AWS SNS para el envío de mensajes y correos electrónicos desde tu aplicación PHP.
+
+Para abrir y permitir el tráfico a través de los puertos específicos (HTTP, SSH, 3036 y 8080) en un servidor Linux utilizando comandos en la terminal, generalmente necesitarás utilizar un firewall como `iptables` o `firewalld`, dependiendo de la distribución de Linux que estés utilizando. A continuación te proporciono ejemplos de cómo hacerlo en ambas configuraciones.
+
+### Utilizando `iptables`
+
+`iptables` es una utilidad de firewall estándar en muchas distribuciones de Linux. Puedes abrir y permitir el tráfico en los puertos necesarios utilizando los siguientes comandos:
+
+#### 1. Abrir Puertos HTTP (80), SSH (22), 3036 y 8080:
+
+```bash
+# Permitir tráfico HTTP (puerto 80)
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+
+# Permitir tráfico SSH (puerto 22)
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# Permitir tráfico en puerto 3036
+sudo iptables -A INPUT -p tcp --dport 3036 -j ACCEPT
+
+# Permitir tráfico en puerto 8080
+sudo iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
+```
+
+#### 2. Guardar los Cambios en `iptables`:
+
+Después de agregar reglas para permitir el tráfico en los puertos especificados, asegúrate de guardar los cambios para que persistan después de reiniciar el servidor:
+
+```bash
+sudo service iptables save
+```
+
