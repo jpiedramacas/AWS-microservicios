@@ -1,11 +1,3 @@
-### Requisitos Previos:
-
-1. **Instancia de AWS EC2**: Necesitas una instancia de AWS EC2 en ejecución. Asegúrate de tener acceso a esta instancia a través de SSH y que tenga los permisos necesarios para instalar software.
-
-2. **Acceso de Usuario**: Debes tener acceso como usuario con permisos sudo en la instancia EC2 para poder instalar Docker y otras herramientas.
-
-3. **Puertos Abiertos**: Asegúrate de tener los puertos necesarios abiertos en el grupo de seguridad de la instancia EC2 para permitir el tráfico HTTP (puerto 80) y acceso a phpMyAdmin (puerto 8080) desde tu dirección IP o cualquier otra fuente necesaria.
-
 ### Pasos para Despliegue:
 
 1. **Conéctate a la Instancia EC2**: Utiliza SSH para conectarte a tu instancia EC2 desde tu terminal local:
