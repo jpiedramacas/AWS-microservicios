@@ -1,5 +1,3 @@
-Para desplegar el entorno de desarrollo descrito en el README.md utilizando Docker en una instancia de AWS EC2, necesitarás cumplir con ciertos requisitos previos y seguir una serie de pasos para configurar y ejecutar correctamente el entorno. Aquí están los requisitos y pasos necesarios:
-
 ### Requisitos Previos:
 
 1. **Instancia de AWS EC2**: Necesitas una instancia de AWS EC2 en ejecución. Asegúrate de tener acceso a esta instancia a través de SSH y que tenga los permisos necesarios para instalar software.
