@@ -53,12 +53,19 @@
    sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
    sudo php -r "unlink('composer-setup.php');"
    ```
+   
+### AWS SNS (Amazon Simple Notification Service)
 
-8. **Descarga el Repositorio y Configura el Entorno**:
+Para integrar AWS SNS en tu aplicación PHP, necesitarás los siguientes requisitos:
 
-   Clona tu repositorio que contiene los archivos `docker-compose.yml`, `index.html`, `submit.php`, `Dockerfile`, y `create_table.sql` en la instancia EC2. Asegúrate de ubicarte en el directorio donde deseas almacenar estos archivos.
+1. **Cuenta de AWS**: Debes tener una cuenta de AWS y acceso a AWS Management Console.
 
-9. **Ejecuta Docker Compose**:
+2. **IAM Role**: Asegúrate de que la instancia EC2 tenga un IAM Role asociado que permita el acceso al servicio SNS. Este rol debería tener al menos permisos para publicar mensajes en el tema SNS.
+
+3. **Tema SNS**: Crea un tema SNS en la consola de AWS y toma nota del ARN del tema. Este ARN se usará en tu aplicación PHP para enviar mensajes al tema.
+
+4. **Región de AWS**: Usa la misma región de AWS en la que has configurado tu tema SNS. Asegúrate de configurar la región adecuada en la inicialización del cliente SNS en tu aplicación PHP.
+8. **Ejecuta Docker Compose**:
 
    Ubícate en el directorio donde se encuentra tu archivo `docker-compose.yml` y ejecuta:
 
@@ -72,18 +79,6 @@
 
     Utiliza el navegador web para acceder a la aplicación web en `http://<direccion_ip_publica>` y a phpMyAdmin en `http://<direccion_ip_publica>:8080`. Reemplaza `<direccion_ip_publica>` con la dirección IP pública de tu instancia EC2.
 
-
-### AWS SNS (Amazon Simple Notification Service)
-
-Para integrar AWS SNS en tu aplicación PHP, necesitarás los siguientes requisitos:
-
-1. **Cuenta de AWS**: Debes tener una cuenta de AWS y acceso a AWS Management Console.
-
-2. **IAM Role**: Asegúrate de que la instancia EC2 tenga un IAM Role asociado que permita el acceso al servicio SNS. Este rol debería tener al menos permisos para publicar mensajes en el tema SNS.
-
-3. **Tema SNS**: Crea un tema SNS en la consola de AWS y toma nota del ARN del tema. Este ARN se usará en tu aplicación PHP para enviar mensajes al tema.
-
-4. **Región de AWS**: Usa la misma región de AWS en la que has configurado tu tema SNS. Asegúrate de configurar la región adecuada en la inicialización del cliente SNS en tu aplicación PHP.
 
 
 ### Notas Adicionales:
