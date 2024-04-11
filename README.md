@@ -2,7 +2,35 @@
 Ya que este paso ya está cubierto en la lista anterior, puedes omitirlo si ya lo has realizado.
 
 ### 2. Instalar Docker Compose
-Este paso también está cubierto en la lista anterior, así que puedes omitirlo si ya has instalado Docker Compose.
+Para instalar Docker Compose en tu sistema, puedes seguir los pasos adecuados según tu sistema operativo. Docker Compose es compatible con una variedad de plataformas, incluyendo Linux, macOS y Windows.
+
+
+1. **Descargar la versión actual de Docker Compose**:
+   
+   Puedes obtener la última versión de Docker Compose utilizando `curl`. Por ejemplo, para descargar la versión 1.29.2:
+
+   ```bash
+   sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+   ```
+
+   Asegúrate de reemplazar `1.29.2` con la versión más reciente si es diferente.
+
+2. **Dar permisos de ejecución al binario de Docker Compose**:
+   
+   ```bash
+   sudo chmod +x /usr/local/bin/docker-compose
+   ```
+
+3. **Verificar la instalación**:
+   
+   Para asegurarte de que Docker Compose se haya instalado correctamente, puedes verificar su versión:
+
+   ```bash
+   docker-compose --version
+   ```
+
+   Esto debería mostrar la versión instalada de Docker Compose.
+
 
 ### 3. Crear un Tema SNS y Suscribirse
 Para crear un tema SNS y suscribirte a él, sigue estos pasos:
