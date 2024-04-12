@@ -1,3 +1,9 @@
+### 1. CONFLICTO
+Hola muy buenas a todos. Conflicto para la rama Prueba2
+
+
+
+
 ### 1. Instalar Docker
 Ya que este paso ya está cubierto en la lista anterior, puedes omitirlo si ya lo has realizado.
 
