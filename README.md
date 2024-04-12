@@ -107,3 +107,4 @@ Después de agregar reglas para permitir el tráfico en los puertos especificado
 sudo service iptables save
 ```
 
+
