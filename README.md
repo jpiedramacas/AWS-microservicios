@@ -1,3 +1,4 @@
+
 ### 1. Instalar Docker
 Ya que este paso ya está cubierto en la lista anterior, puedes omitirlo si ya lo has realizado.
 
