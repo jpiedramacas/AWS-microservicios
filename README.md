@@ -1,6 +1,7 @@
 ### 1. Instalar Docker
 Ya que este paso ya está cubierto en la lista anterior, puedes omitirlo si ya lo has realizado.
 
+
 ### 2. Instalar Docker Compose
 Para instalar Docker Compose en tu sistema, puedes seguir los pasos adecuados según tu sistema operativo. Docker Compose es compatible con una variedad de plataformas, incluyendo Linux, macOS y Windows.
 
